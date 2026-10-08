@@ -1,6 +1,6 @@
 import hero from '../assets/VSK_maquette_hero_image.png';
 import weddingIllustration from '../assets/service-wedding.webp';
-import realPortrait from '../assets/VSK_Events_Images_Enhanced/Portrait masculin au jardin doré.png';
+import realPortrait from '../assets/vsk-about.webp';
 import realDjAtMixer from '../assets/VSK_Events_Images_Enhanced/vsk-real-17.webp';
 import realDjPov from '../assets/VSK_Events_Images_Enhanced/vsk-real-21.webp';
 import realCrowd from '../assets/VSK_Events_Images_Enhanced/vsk-real-22.webp';
@@ -14,6 +14,9 @@ import realEventHost from '../assets/VSK_Events_Images_Enhanced/vsk-real-10.webp
 import realLighting from '../assets/VSK_Events_Images_Enhanced/vsk-real-35.webp';
 import realBoothVenue from '../assets/VSK_Events_Images_Enhanced/vsk-real-36.webp';
 import cta from '../assets/vsk-cta.webp';
+import realDance from '../assets/VSK_Events_Images_Enhanced/vsk-real-24.webp';
+import realVenueWide from '../assets/VSK_Events_Images_Enhanced/vsk-real-23.webp';
+import realDjProfile from '../assets/VSK_Events_Images_Enhanced/vsk-real-20.webp';
 
 export const siteImages = {
   hero,
@@ -47,4 +50,7 @@ export const siteImages = {
     { src: realBoothVenue, width: 588, height: 786, alt: 'Régie DJ et installation lumineuse dans un lieu de réception', position: '55% center' },
   ],
   cta,
+  dance: realDance,
+  venueWide: realVenueWide,
+  djProfile: realDjProfile,
 };

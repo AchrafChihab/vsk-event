@@ -27,7 +27,7 @@ export default function Services({ items = defaultServices }) {
           >
             <Link
               to={service.path ?? '/prestations'}
-              aria-label={`Découvrir la prestation ${service.title}`}
+              aria-label={service.id === 'contact-cta' ? 'Demander un devis' : `Découvrir la prestation ${service.title}`}
               tabIndex={0}
             >
               <img
@@ -38,9 +38,11 @@ export default function Services({ items = defaultServices }) {
                 decoding="async"
               />
               <div className="service-card__overlay" aria-hidden="true" />
-              <span className="service-card__num" aria-hidden="true">
-                {String(index + 1).padStart(2, '0')}
-              </span>
+              {service.id !== 'contact-cta' && (
+                <span className="service-card__num" aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+              )}
               <div className="service-card__content">
                 <h3 className="service-card__title">{service.title}</h3>
                 <span className="service-card__arrow" aria-hidden="true">

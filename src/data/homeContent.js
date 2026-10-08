@@ -31,11 +31,12 @@ export const services = [
     path: '/prestations/entreprises',
   },
   {
-    title: 'Soirées privées',
-    description: 'Tous styles, toutes ambiances.',
+    id: 'contact-cta',
+    title: 'Un autre projet\u00a0?',
+    description: 'Parlons-en.',
     image: siteImages.services.club,
     imageAlt: 'Valentin aux commandes de sa régie DJ',
-    path: '/prestations',
+    path: '/contact',
   },
 ];
 
@@ -43,16 +44,32 @@ export const galleryItems = siteImages.homeGallery;
 
 export const faqItems = [
   {
+    question: "Quels types d'événements animez-vous ?",
+    answer: "Mariages, soirées privées, anniversaires et événements d'entreprise. Chaque prestation est préparée selon votre événement, votre public et l'ambiance souhaitée.",
+  },
+  {
     question: "Quel est le tarif d'une prestation ?",
-    answer: 'Chaque événement est unique. Le devis dépend du format, de la durée, du lieu et des options techniques choisies.',
+    answer: "Chaque événement est unique. Le devis dépend du format, de la durée, du lieu et des options techniques choisies. Les mariages débutent à partir de 1 400 €, les soirées privées à partir de 500 €, et les événements d'entreprise à partir de 600 €.",
   },
   {
-    question: "Jusqu'où te déplaces-tu ?",
-    answer: "Les déplacements sont étudiés selon le lieu et le format de votre événement. Indiquez l'adresse dans votre demande pour recevoir une proposition adaptée.",
+    question: 'Comment se déroule la préparation musicale ?',
+    answer: "Avant chaque événement, un échange est organisé pour comprendre vos goûts musicaux, les moments forts à accompagner et les titres à éviter. La playlist est construite en amont et ajustée en temps réel le soir venu.",
   },
   {
-    question: 'Peut-on choisir les musiques ?',
-    answer: "Oui. Nous préparons ensemble les titres incontournables, les morceaux à éviter et l'ambiance souhaitée.",
+    question: 'Peut-on personnaliser la playlist ?',
+    answer: "Oui. Nous préparons ensemble les titres incontournables, les morceaux à éviter et l'ambiance souhaitée. La programmation finale reste adaptable selon l'énergie de la salle.",
+  },
+  {
+    question: 'Le matériel son et lumière est-il inclus ?',
+    answer: 'Oui. Selon la formule choisie, la prestation inclut sonorisation, éclairage, régie DJ et micros sans fil. Le matériel exact est précisé dans chaque devis.',
+  },
+  {
+    question: 'Le déplacement est-il inclus ?',
+    answer: 'Les déplacements dans un rayon de 30 km sont inclus dans les formules standard. Au-delà, un forfait déplacement est ajouté au devis selon la distance.',
+  },
+  {
+    question: 'Combien de temps à l\u2019avance faut-il réserver ?',
+    answer: 'Les disponibilités varient selon les dates. Pour les mariages notamment, il est conseillé de prendre contact le plus tôt possible afin de garantir votre date.',
   },
 ];
 

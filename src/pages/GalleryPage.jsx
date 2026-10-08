@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { siteImages } from '../data/images';
-import { RevealImage } from '../components/Reveal';
+import { Reveal, RevealImage } from '../components/Reveal';
 import PageHero from './PageHero';
 
 const gallery = siteImages.gallery;
@@ -54,6 +55,15 @@ export default function GalleryPage() {
               <span className="gallery-wall__hint" aria-hidden="true">Voir l’image</span>
             </button>
           </RevealImage>)}
+        </section>
+        <section className="gallery-page-cta section-wrap">
+          <Reveal>
+            <p className="microcopy">Un événement à célébrer ?</p>
+            <h2>Votre soirée pourrait être ici.</h2>
+            <Link className="button button-primary" to="/contact">
+              Demander un devis <ArrowRight aria-hidden="true" />
+            </Link>
+          </Reveal>
         </section>
       </div>
       {active >= 0 ? <div className="lightbox" role="dialog" aria-modal="true" aria-label="Aperçu de la galerie" onMouseDown={(event) => { if (event.target === event.currentTarget) setActive(-1); }}>

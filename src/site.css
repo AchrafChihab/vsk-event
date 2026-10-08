@@ -576,7 +576,7 @@ section[id] { scroll-margin-top: 96px; }
   .hero-photo { width: 132%; max-width: none; object-position: 56% 42%; }
   .hero-shade { background: linear-gradient(0deg, rgba(2, 4, 7, 0.94) 0%, rgba(2, 4, 7, 0.72) 42%, rgba(2, 4, 7, 0.28) 69%, rgba(2, 4, 7, 0.08) 100%), linear-gradient(90deg, rgba(2, 4, 7, 0.68), rgba(2, 4, 7, 0.04) 78%), linear-gradient(180deg, rgba(2, 4, 7, 0.28), transparent 24%); }
   .hero-copy { width: calc(100% - 40px); padding: 132px 0 32px; }
-  .hero-copy h1 { font-size: clamp(3.65rem, 16vw, 6rem); line-height: 0.83; }
+  .hero-copy h1 { font-size: clamp(3.4rem, 14vw, 6rem); line-height: 0.83; }
   .hero-intro { max-width: 36rem; font-size: 0.95rem; }
   .hero-actions { align-items: stretch; flex-direction: column; }
   .hero-actions .button { width: 100%; }
@@ -587,9 +587,10 @@ section[id] { scroll-margin-top: 96px; }
   .about-section { grid-template-columns: 1fr; gap: 58px; padding-block: var(--section-normal); }
   .about-portrait-wrap, .about-copy { grid-column: 1; }
   .about-portrait-wrap { width: calc(100% - 24px); max-width: 520px; }
-  .about-copy { position: relative; z-index: 2; margin-top: -20px; padding-left: 10vw; }
+  .about-copy { position: relative; z-index: 2; margin-top: -20px; padding-left: clamp(0px, 4vw, 28px); }
   .about-copy h2, .services-heading h2, .gallery-heading h2, .faq-heading h2, .contact-copy h2 { font-size: clamp(3.2rem, 14vw, 5rem); }
   .signature { right: -18px; }
+  .about-portrait-wrap { overflow: hidden; }
   .services-section, .contact-section, .contact-cta-section { padding-inline: 20px; }
   .services-heading { margin-bottom: 42px; }
   .services-bento { grid-template-columns: 1fr 1fr; grid-template-rows: 280px 280px; gap: 10px; }
@@ -603,7 +604,6 @@ section[id] { scroll-margin-top: 96px; }
   .service-number { margin-bottom: 20px; }
   .service-content h3 { font-size: clamp(3rem, 13vw, 4.5rem); }
   .gallery-section { padding-block: 72px; }
-  .faq-outer { }
   .faq-section { padding-block: 64px; }
   .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: none; gap: 10px; }
   .gallery-cell-1 { grid-column: 1 / -1; grid-row: auto; height: 300px; }
@@ -621,15 +621,36 @@ section[id] { scroll-margin-top: 96px; }
   .form-wide { grid-column: 1; }
   .contact-form .button { width: 100%; }
   .final-cta { min-height: 680px; }
-  .final-cta h2 { font-size: clamp(4rem, 18vw, 6rem); }
+  .final-cta h2 { font-size: clamp(3.6rem, 16vw, 6rem); }
   /* Footer mobile */
+  .footer-inner { width: min(calc(100% - 40px), 1380px); }
   .footer-cta { grid-template-columns: 1fr; gap: 32px; align-items: start; }
-  .footer-cta__headline { font-size: clamp(3rem, 13vw, 5rem); }
+  .footer-cta__headline { font-size: clamp(2.8rem, 12vw, 5rem); }
   .footer-cta__btn { align-self: flex-start; }
   .footer-mid { grid-template-columns: 1fr; gap: 40px; }
+  .footer-brand__events { font-size: max(0.72rem, 1.1vw); }
   .footer-nav { grid-template-columns: 1fr 1fr; gap: 24px 32px; }
   .footer-meta { grid-template-columns: 1fr; gap: 8px; text-align: center; padding-block: 18px 28px; }
   .footer-meta__credit { text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .section-wrap { width: min(calc(100% - 32px), 1380px); }
+  .hero-copy { width: calc(100% - 32px); padding-top: 116px; }
+  .hero-copy h1 { font-size: clamp(3rem, 13.5vw, 5rem); }
+  .hero-intro { font-size: 0.92rem; }
+  .hero-trust li:not(:last-child)::after { margin-inline: 8px; }
+  .faq-item button { min-height: 72px; font-size: 0.94rem; }
+  .contact-cta-copy h2 { font-size: clamp(2.6rem, 11vw, 4.5rem); }
+  .final-cta h2 { font-size: clamp(3rem, 14vw, 5rem); }
+  /* Footer small */
+  .footer-inner { width: min(calc(100% - 32px), 1380px); padding-top: clamp(56px, 8vw, 80px); }
+  .footer-cta__headline { font-size: clamp(2.4rem, 11.5vw, 4rem); }
+  .footer-cta__btn { font-size: 0.74rem; padding: 12px 20px; }
+  .footer-brand__vsk { font-size: clamp(2.2rem, 9vw, 3.6rem); }
+  .footer-brand__events { font-size: 0.72rem; }
+  .footer-signature__text { font-size: clamp(4.5rem, 18vw, 10rem); }
+  .footer-meta { font-size: 0.65rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -645,12 +666,37 @@ section[id] { scroll-margin-top: 96px; }
   .services-bento { grid-template-columns: 1fr; grid-template-rows: 260px 220px 220px; }
   .service-card--portrait-b { display: none; }
   .service-card--wide { display: block; grid-column: 1; grid-row: 3; }
-  .gallery-cell-1 { height: 280px; }
+  .gallery-cell-1 { height: 260px; }
   .gallery-cell-2, .gallery-cell-3 { height: 180px; }
   .gallery-cell-4 { height: 240px; }
-  .gallery-cell-5, .gallery-cell-6 { height: 170px; }
-  .gallery-cell-7 { height: 220px; }
+  .gallery-cell-5, .gallery-cell-6 { height: 160px; }
+  .gallery-cell-7 { height: 210px; }
   .contact-cta-form form { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 375px) {
+  .section-wrap { width: calc(100% - 28px); }
+  .hero-copy { width: calc(100% - 28px); padding-top: 108px; }
+  .hero-copy h1 { font-size: clamp(2.8rem, 13vw, 4.5rem); letter-spacing: -0.025em; }
+  .hero-intro { font-size: 0.88rem; line-height: 1.6; }
+  .hero-trust li { font-size: 0.62rem; }
+  .about-copy { padding-left: 0; }
+  .faq-item button { font-size: 0.9rem; gap: 16px; }
+  .contact-form-wrap { padding: 20px 14px; }
+  .services-bento { grid-template-rows: 240px 200px 200px; }
+  .service-card__title, .service-card--large .service-card__title { font-size: clamp(1.8rem, 8vw, 2.8rem); }
+  .service-card__content { padding: 18px 16px 16px; }
+  .gallery-cell-1 { height: 240px; }
+  .gallery-cell-2, .gallery-cell-3 { height: 160px; }
+  .gallery-cell-4 { height: 210px; }
+  .gallery-cell-5, .gallery-cell-6 { height: 150px; }
+  .gallery-cell-7 { height: 190px; }
+  /* Footer 375 */
+  .footer-inner { width: calc(100% - 28px); }
+  .footer-cta__headline { font-size: clamp(2.2rem, 11vw, 3.6rem); }
+  .footer-brand__vsk { font-size: clamp(2rem, 9vw, 3.2rem); }
+  .footer-signature__text { font-size: clamp(4rem, 17vw, 8rem); }
+  .footer-meta { font-size: 0.62rem; gap: 6px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

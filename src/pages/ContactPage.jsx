@@ -5,9 +5,9 @@ import PageHero from './PageHero';
 
 const serviceTypeByQuery = {
   mariage: 'Mariage',
-  'soiree-privee': 'Soirée privée / anniversaire',
-  entreprise: 'Événement d’entreprise',
-  club: 'Soirées / clubs',
+  'soiree-privee': 'Soir\u00e9e priv\u00e9e / anniversaire',
+  entreprise: '\u00c9v\u00e9nement d\u2019entreprise',
+  club: 'Soir\u00e9es / clubs',
 };
 
 export default function ContactPage() {
@@ -21,11 +21,21 @@ export default function ContactPage() {
 
   return (
     <div className="inner-page contact-page">
-      <PageHero eyebrow="Contact" title={<>Parlons de<br />votre événement.</>} description="Décrivez votre projet, votre lieu et l’ambiance souhaitée. Nous pourrons ensuite échanger sur une proposition adaptée." />
+      <PageHero
+        eyebrow="Contact"
+        title={<>Parlons de<br />votre {'\u00e9'}v{'\u00e9'}nement.</>}
+        description="D\u00e9crivez votre projet, votre lieu et l\u2019ambiance souhait\u00e9e. Je vous r\u00e9ponds rapidement pour construire votre soir\u00e9e."
+      />
       <div id="page-content" className="inner-page__content">
         <Contact
           selectedType={selectedType}
-          types={['Mariage', 'Soirée privée / anniversaire', 'Événement d’entreprise', 'Soirées / clubs']}
+          types={[
+            'Mariage',
+            'Soir\u00e9e priv\u00e9e / anniversaire',
+            '\u00c9v\u00e9nement d\u2019entreprise',
+            'Soir\u00e9es / clubs',
+            'Autre',
+          ]}
         />
       </div>
     </div>
