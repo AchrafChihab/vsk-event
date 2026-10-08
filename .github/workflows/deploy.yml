@@ -1,0 +1,66 @@
+name: Build & Deploy — VSK Events
+
+on:
+  push:
+    branches:
+      - main
+
+# Least-privilege permissions
+permissions:
+  contents: read
+
+jobs:
+  build-and-deploy:
+    name: Build and deploy to N0C
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout source
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js LTS
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      # 3. Install dependencies (requires package-lock.json)
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Build production bundle
+      - name: Build
+        run: npm run build
+
+      # 5. Sanity-check the build output before deploying
+      - name: Verify build output
+        run: |
+          test -f dist/index.html || (echo "ERROR: dist/index.html missing" && exit 1)
+          test -d dist/assets    || (echo "ERROR: dist/assets missing"    && exit 1)
+          test -f dist/.htaccess || (echo "ERROR: dist/.htaccess missing" && exit 1)
+          echo "Build output OK"
+
+      # 6. Write the SSH private key and known_hosts from secrets
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "${{ secrets.N0C_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          echo "${{ secrets.N0C_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      # 7. Deploy via rsync — uploads only dist/ contents, removes stale files
+      - name: Deploy via rsync
+        run: |
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.N0C_PORT }} -o BatchMode=yes" \
+            dist/ \
+            ${{ secrets.N0C_USER }}@${{ secrets.N0C_HOST }}:${{ secrets.N0C_DEPLOY_PATH }}/
+
+      # 8. Clean up private key from runner
+      - name: Clean up SSH key
+        if: always()
+        run: rm -f ~/.ssh/deploy_key
