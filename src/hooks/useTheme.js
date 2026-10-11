@@ -18,9 +18,7 @@ function readStoredTheme() {
 
 export function getInitialTheme() {
   const storedTheme = readStoredTheme();
-  if (storedTheme) return storedTheme;
-  if (typeof window === 'undefined' || !window.matchMedia) return 'dark';
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  return storedTheme === 'light' ? 'light' : 'dark';
 }
 
 export function applyTheme(theme) {
@@ -35,25 +33,14 @@ export function applyTheme(theme) {
 
 export default function useTheme() {
   const [theme, setThemeState] = useState(getInitialTheme);
-  const [hasUserPreference, setHasUserPreference] = useState(() => Boolean(readStoredTheme()));
 
   useIsomorphicLayoutEffect(() => {
     applyTheme(theme);
   }, [theme]);
 
-  useEffect(() => {
-    if (hasUserPreference || !window.matchMedia) return undefined;
-
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const followSystemTheme = (event) => setThemeState(event.matches ? 'dark' : 'light');
-    mediaQuery.addEventListener('change', followSystemTheme);
-    return () => mediaQuery.removeEventListener('change', followSystemTheme);
-  }, [hasUserPreference]);
-
   const setTheme = useCallback((nextTheme) => {
     if (!isTheme(nextTheme)) return;
     setThemeState(nextTheme);
-    setHasUserPreference(true);
     applyTheme(nextTheme);
 
     try {

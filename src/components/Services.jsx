@@ -2,12 +2,20 @@ import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { services as defaultServices } from '../data/homeContent';
 import { Reveal, RevealText } from './Reveal';
+import ResponsiveImage from './ResponsiveImage';
 
 const CARD_CLASSES = [
   'service-card service-card--large',
   'service-card service-card--portrait',
   'service-card service-card--portrait-b',
   'service-card service-card--wide',
+];
+
+const CARD_SIZES = [
+  '(max-width: 768px) 100vw, 67vw',
+  '(max-width: 768px) 100vw, 33vw',
+  '(max-width: 768px) 100vw, 33vw',
+  '(max-width: 768px) 100vw, 67vw',
 ];
 
 export default function Services({ items = defaultServices }) {
@@ -30,12 +38,12 @@ export default function Services({ items = defaultServices }) {
               aria-label={service.id === 'contact-cta' ? 'Demander un devis' : `Découvrir la prestation ${service.title}`}
               tabIndex={0}
             >
-              <img
+              <ResponsiveImage
                 className="service-card__image"
-                src={service.image}
+                image={service.image}
                 alt={service.imageAlt}
+                sizes={CARD_SIZES[index]}
                 loading="lazy"
-                decoding="async"
               />
               <div className="service-card__overlay" aria-hidden="true" />
               {service.id !== 'contact-cta' && (

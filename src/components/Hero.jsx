@@ -52,10 +52,12 @@ export default function Hero({ ready = true, image = siteImages.hero }) {
     <section ref={heroRef} id="accueil" className="hero-section">
       <motion.img
         className="hero-photo"
-        src={image}
+        src={image.src}
+        srcSet={image.srcSet}
+        sizes="100vw"
         alt="DJ en performance aux commandes de sa régie, face à la piste de danse"
-        width="1672"
-        height="941"
+        width={image.width}
+        height={image.height}
         fetchPriority="high"
         decoding="async"
         initial={reduceMotion ? false : { scale: 1.06 }}

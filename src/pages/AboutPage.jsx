@@ -5,9 +5,10 @@ import { Link } from 'react-router-dom';
 import { aboutContent } from '../data/homeContent';
 import { siteImages } from '../data/images';
 import { Reveal, RevealImage, RevealText } from '../components/Reveal';
+import ResponsiveImage from '../components/ResponsiveImage';
 
 /* ─── Cinematic full-bleed photo break with subtle parallax ─── */
-function PhotoBreak({ src, alt, children }) {
+function PhotoBreak({ image, alt, children }) {
   const ref = useRef(null);
   const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
@@ -17,12 +18,14 @@ function PhotoBreak({ src, alt, children }) {
     <div ref={ref} className="about-photo-break" aria-label={alt}>
       <div className="about-photo-break__track">
         <motion.img
-          src={src}
+          src={image.src}
+          srcSet={image.srcSet}
+          sizes="100vw"
           alt={alt}
           style={{ y }}
           className="about-photo-break__img"
-          width="1920"
-          height="1080"
+          width={image.width}
+          height={image.height}
           loading="lazy"
           decoding="async"
         />
@@ -61,12 +64,12 @@ export default function AboutPage() {
           </Reveal>
         </div>
         <RevealImage className="about-hero__visual">
-          <img
-            src={siteImages.about}
+          <ResponsiveImage
+            image={siteImages.about}
             alt="Portrait de Valentin, DJ VSK Events"
-            width="542"
-            height="820"
+            sizes="(max-width: 768px) 88vw, 42vw"
             fetchPriority="high"
+            loading="eager"
           />
           <span className="about-hero__frame" aria-hidden="true" />
         </RevealImage>
@@ -137,8 +140,8 @@ export default function AboutPage() {
 
         {/* ── 04 CINEMATIC PHOTO BREAK ── */}
         <PhotoBreak
-          src={siteImages.homeGallery[1].src}
-          alt="Valentin mixe face aux invités pendant une soirée en extérieur"
+          image={siteImages.aboutStory}
+          alt="Valentin anime une soirée depuis sa régie"
         >
           <RevealText>
             <p className="about-photo-break__quote">
@@ -191,13 +194,11 @@ export default function AboutPage() {
         {/* ── 06 HUMAN MOMENT ── */}
         <section className="about-human section-wrap" aria-labelledby="about-human-title">
           <RevealImage className="about-human__visual">
-            <img
-              src={siteImages.homeGallery[0].src}
+            <ResponsiveImage
+              image={siteImages.aboutHuman}
               alt="Valentin aux commandes de sa régie DJ"
-              width="598"
-              height="896"
+              sizes="(max-width: 768px) 100vw, 44vw"
               loading="lazy"
-              decoding="async"
             />
           </RevealImage>
           <div className="about-human__copy">

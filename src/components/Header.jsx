@@ -20,6 +20,7 @@ export default function Header({ navigation = primaryNavigation }) {
   const [scrolled, setScrolled] = useState(false);
   const menuButtonRef = useRef(null);
   const headerRef = useRef(null);
+  const navRef = useRef(null);
   const servicesToggleRef = useRef(null);
   const firstMenuLinkRef = useRef(null);
   const { scrollY } = useScroll();
@@ -73,7 +74,8 @@ export default function Header({ navigation = primaryNavigation }) {
       }
       if (event.key !== 'Tab' || !headerRef.current) return;
 
-      const focusable = Array.from(headerRef.current.querySelectorAll('a[href], button:not([disabled])'))
+      const focusable = [headerRef.current, navRef.current]
+        .flatMap((container) => Array.from(container?.querySelectorAll('a[href], button:not([disabled])') ?? []))
         .filter((element) => element.getClientRects().length > 0);
       if (!focusable.length) return;
       const first = focusable[0];
@@ -106,13 +108,33 @@ export default function Header({ navigation = primaryNavigation }) {
   const headerClasses = ['site-header', headerSolid && 'is-solid', menuOpen && 'is-menu-open'].filter(Boolean).join(' ');
 
   return (
-    <header ref={headerRef} className={headerClasses}>
-      <div className="site-header__inner">
-      <Link to="/" className="brand-link" onClick={closeMenuAfterNavigation} aria-label="VSK Events, accueil">
-        <VskLogo />
-      </Link>
+    <>
+      <header ref={headerRef} className={headerClasses}>
+        <div className="site-header__inner">
+          <Link to="/" className="brand-link" onClick={closeMenuAfterNavigation} aria-label="VSK Events, accueil">
+            <VskLogo />
+          </Link>
+
+          <div className="header-actions">
+            <Link className="button button-primary header-quote-cta" to="/contact" onClick={closeMenuAfterNavigation}>Demander un devis <ArrowRight aria-hidden="true" /></Link>
+            <ThemeToggle />
+            <button
+              ref={menuButtonRef}
+              className="menu-toggle"
+              type="button"
+              onClick={() => setMenuOpen((value) => !value)}
+              aria-expanded={menuOpen}
+              aria-controls="primary-navigation"
+              aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+            >
+              {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+            </button>
+          </div>
+        </div>
+      </header>
 
       <nav
+        ref={navRef}
         id="primary-navigation"
         className={menuOpen ? 'primary-nav is-open' : 'primary-nav'}
         aria-label="Navigation principale"
@@ -122,7 +144,8 @@ export default function Header({ navigation = primaryNavigation }) {
             if (!event.currentTarget.contains(event.relatedTarget)) setServicesOpen(false);
           } : undefined}>
             <NavLink ref={index === 0 ? firstMenuLinkRef : undefined} to={to} end={end} onClick={closeMenuAfterNavigation}>
-              {label}
+              <span className="primary-nav__index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <span>{label}</span>
             </NavLink>
             {hasMenu ? <>
               <button ref={servicesToggleRef} className="nav-submenu-toggle" type="button" aria-label={servicesOpen ? 'Masquer les prestations' : 'Afficher les prestations'} aria-haspopup="true" aria-expanded={servicesOpen} aria-controls="services-submenu" onClick={() => setServicesOpen((open) => !open)}>
@@ -134,24 +157,13 @@ export default function Header({ navigation = primaryNavigation }) {
             </> : null}
           </div>
         ))}
+        <div className="mobile-nav-cta">
+          <Link to="/contact" onClick={closeMenuAfterNavigation}>
+            Demander un devis
+            <ArrowRight aria-hidden="true" />
+          </Link>
+        </div>
       </nav>
-
-      <div className="header-actions">
-        <Link className="button button-primary header-quote-cta" to="/contact" onClick={closeMenuAfterNavigation}>Demander un devis <ArrowRight aria-hidden="true" /></Link>
-        <ThemeToggle />
-        <button
-          ref={menuButtonRef}
-          className="menu-toggle"
-          type="button"
-          onClick={() => setMenuOpen((value) => !value)}
-          aria-expanded={menuOpen}
-          aria-controls="primary-navigation"
-          aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
-        >
-          {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
-        </button>
-      </div>
-      </div>
-    </header>
+    </>
   );
 }

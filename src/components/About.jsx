@@ -2,17 +2,17 @@ import { Link } from 'react-router-dom';
 import { aboutContent } from '../data/homeContent';
 import { siteImages } from '../data/images';
 import { Reveal, RevealImage, RevealText } from './Reveal';
+import ResponsiveImage from './ResponsiveImage';
 
 export default function About({ content = aboutContent }) {
   return (
     <section id="apropos" className="about-section section-wrap" aria-labelledby="about-title">
       <RevealImage className="about-portrait-wrap">
         <div className="portrait-frame">
-          <img
-            src={siteImages.about}
+          <ResponsiveImage
+            image={siteImages.about}
             alt="Portrait de Valentin dans un cadre naturel"
-            width="542"
-            height="820"
+            sizes="(max-width: 768px) 86vw, 42vw"
             loading="lazy"
           />
         </div>

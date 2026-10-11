@@ -1,21 +1,18 @@
-import { useEffect, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { galleryItems as defaultItems } from '../data/homeContent';
 import { Reveal, RevealImage, RevealText } from './Reveal';
+import ResponsiveImage from './ResponsiveImage';
+
+const GALLERY_SIZES = {
+  feature: '(max-width: 768px) 100vw, 67vw',
+  portrait: '(max-width: 768px) 50vw, 33vw',
+  wide: '(max-width: 768px) 100vw, 58vw',
+  'portrait-small': '(max-width: 768px) 50vw, 25vw',
+  small: '(max-width: 768px) 50vw, 42vw',
+};
 
 export default function Gallery({ items = defaultItems }) {
-  const [isSmallViewport, setIsSmallViewport] = useState(() => (
-    typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
-  ));
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 768px)');
-    const updateViewport = () => setIsSmallViewport(mediaQuery.matches);
-    mediaQuery.addEventListener('change', updateViewport);
-    return () => mediaQuery.removeEventListener('change', updateViewport);
-  }, []);
-
   return (
     <section id="galerie" className="gallery-section section-wrap" aria-labelledby="gallery-title">
       <RevealText className="section-heading gallery-heading">
@@ -28,18 +25,14 @@ export default function Gallery({ items = defaultItems }) {
           <RevealImage className={`gallery-cell gallery-cell-${index + 1}`} key={item.src}>
             <figure className="gallery-item">
               <picture>
-                {item.mobileImage ? <source media="(max-width: 768px)" srcSet={item.mobileImage.src} /> : null}
-                <img
-                  src={item.src}
+                <ResponsiveImage
+                  image={item}
                   alt={item.alt}
-                  width={isSmallViewport && item.mobileImage ? item.mobileImage.width : item.width}
-                  height={isSmallViewport && item.mobileImage ? item.mobileImage.height : item.height}
-                  style={{ objectPosition: item.position ?? 'center' }}
+                  sizes={GALLERY_SIZES[item.layout] ?? '50vw'}
                   loading="lazy"
-                  decoding="async"
                 />
               </picture>
-              <figcaption>{item.label}</figcaption>
+              {item.label ? <figcaption>{item.label}</figcaption> : null}
             </figure>
           </RevealImage>
         ))}

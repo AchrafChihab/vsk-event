@@ -2,6 +2,7 @@ import { ArrowRight, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Reveal, RevealImage, RevealText } from '../components/Reveal';
 import PageHero from './PageHero';
+import ResponsiveImage from '../components/ResponsiveImage';
 
 const PREFIX = 'À partir de ';
 
@@ -23,8 +24,8 @@ export default function ServiceDetailPage({ service }) {
         eyebrow={service.eyebrow}
         title={service.title}
         description={service.headline}
-        image={service.image}
-        imageAlt={service.imageAlt}
+        image={service.heroImage ?? service.image}
+        imageAlt={service.heroImageAlt ?? service.imageAlt}
         variant="service"
       >
         <span className="service-detail__hero-price">{service.price}</span>
@@ -68,7 +69,7 @@ export default function ServiceDetailPage({ service }) {
         ) : (
           <section className="service-detail__club section-wrap">
             <RevealImage>
-              <img src={service.image} alt={service.imageAlt} width="1122" height="1402" loading="lazy" />
+              <ResponsiveImage image={service.image} alt={service.imageAlt} sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" />
             </RevealImage>
             <Reveal>
               <p className="microcopy">Un format à définir ensemble</p>

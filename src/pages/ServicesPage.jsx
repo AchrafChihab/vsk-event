@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Reveal, RevealImage, RevealText } from '../components/Reveal';
 import { siteImages } from '../data/images';
 import PageHero from './PageHero';
+import ResponsiveImage from '../components/ResponsiveImage';
 
 const overviewServices = [
   {
@@ -50,13 +51,11 @@ export default function ServicesPage() {
               key={service.id}
             >
               <RevealImage className="service-overview__media">
-                <img
-                  src={service.image}
+                <ResponsiveImage
+                  image={service.image}
                   alt={service.imageAlt}
-                  width="1122"
-                  height="1402"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   loading="lazy"
-                  decoding="async"
                 />
               </RevealImage>
               <div className="service-overview__copy">

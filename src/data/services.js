@@ -10,7 +10,9 @@ export const serviceDetails = {
     description: 'Une ambiance pensée avec vous, pour accompagner chaque moment de votre journée et faire danser vos invités.',
     price: 'À partir de 1 400 €',
     image: siteImages.services.wedding,
-    imageAlt: 'Illustration d\u2019une ouverture de bal lors d\u2019une réception de mariage',
+    imageAlt: 'Invités réunis pendant une réception en extérieur',
+    heroImage: siteImages.serviceHeroes.wedding,
+    heroImageAlt: 'Ouverture de bal dans une réception de mariage',
     contactService: 'mariage',
     sections: [
       { title: 'Son & lumière', items: ['Sonorisation professionnelle, jusqu\u2019à 4 enceintes ou caissons selon le besoin', 'Éclairage complet de la piste de danse', 'Régie DJ professionnelle'] },
@@ -28,6 +30,8 @@ export const serviceDetails = {
     price: 'À partir de 500 €',
     image: siteImages.services.private,
     imageAlt: 'Invités réunis sur une piste de danse en extérieur',
+    heroImage: siteImages.serviceHeroes.private,
+    heroImageAlt: 'Invités dansant pendant une soirée privée',
     contactService: 'soiree-privee',
     sections: [
       { title: 'Son & lumière', items: ['Éclairage DJ de base', 'Deux enceintes professionnelles EV 30M', 'Un micro sans fil Shure', 'Régie DJ professionnelle', 'Enceinte Bluetooth pour l\u2019apéritif'] },
@@ -44,7 +48,9 @@ export const serviceDetails = {
     description: 'Un accompagnement musical préparé avec vous et adapté au format de votre événement professionnel.',
     price: 'À partir de 600 €',
     image: siteImages.services.corporate,
-    imageAlt: 'Salle préparée pour un événement professionnel',
+    imageAlt: 'Régie VSK installée pour un événement professionnel',
+    heroImage: siteImages.serviceHeroes.corporate,
+    heroImageAlt: 'Réception professionnelle dans un lieu événementiel',
     contactService: 'entreprise',
     sections: [
       { title: 'Son & lumière', items: ['Deux à quatre enceintes professionnelles', 'Éclairage adapté à la configuration', 'Deux micros sans fil', 'Régie DJ professionnelle', 'Enceinte Bluetooth pour l\u2019apéritif'] },
@@ -64,7 +70,7 @@ export const serviceCards = [
     title: 'Un autre projet\u00a0?',
     description: 'Parlons-en.',
     image: siteImages.services.club,
-    imageAlt: '',
+    imageAlt: 'Valentin anime une soirée depuis sa régie DJ',
     path: '/contact',
   },
 ];

@@ -13,7 +13,7 @@ export const services = [
     title: 'Mariages',
     description: 'Un jour unique, une ambiance inoubliable.',
     image: siteImages.services.wedding,
-    imageAlt: "Illustration d'une ouverture de bal lors d'une réception de mariage",
+    imageAlt: "Invités réunis pendant une réception en extérieur",
     path: '/prestations/mariages',
   },
   {
@@ -27,7 +27,7 @@ export const services = [
     title: "Événements d'entreprise",
     description: 'Professionnalisme et ambiance sur mesure.',
     image: siteImages.services.corporate,
-    imageAlt: 'Salle préparée pour un événement professionnel',
+    imageAlt: 'Régie VSK installée pour un événement professionnel',
     path: '/prestations/entreprises',
   },
   {

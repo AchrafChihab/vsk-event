@@ -1,5 +1,6 @@
 import { ArrowDown } from 'lucide-react';
 import { Reveal, RevealText } from '../components/Reveal';
+import ResponsiveImage from '../components/ResponsiveImage';
 
 export default function PageHero({
   eyebrow,
@@ -13,7 +14,7 @@ export default function PageHero({
   const isImage = Boolean(image);
   return (
     <section className={`page-hero page-hero--${variant}${isImage ? ' page-hero--image' : ''}`} aria-labelledby="page-hero-title">
-      {image ? <img className="page-hero__image" src={image} alt={imageAlt} width={variant === 'service' ? '1122' : '1536'} height={variant === 'service' ? '1402' : '1024'} fetchPriority={variant === 'service' ? 'high' : undefined} /> : null}
+      {image ? <ResponsiveImage className="page-hero__image" image={image} alt={imageAlt} sizes="100vw" loading="eager" fetchPriority={variant === 'service' ? 'high' : undefined} /> : null}
       {isImage ? <span className="page-hero__shade" aria-hidden="true" /> : null}
       <div className="page-hero__inner section-wrap">
         <RevealText>
