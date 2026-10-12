@@ -22,7 +22,7 @@ export default function FinalCta({ href = '/contact' }) {
           <span className="final-cta-line">Votre public.</span>
           <span className="final-cta-line final-cta-line--accent">La bonne ambiance.</span>
         </h2>
-        <Link className="button button-primary" to={href}>Demander mon devis <ArrowRight aria-hidden="true" /></Link>
+        <Link className="button button-primary final-cta-button" to={href}>Demander mon devis <ArrowRight aria-hidden="true" /></Link>
       </RevealText>
     </section>
   );
